@@ -60,7 +60,7 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages1"
                     aria-expanded="true" aria-controls="collapsePages1">
                     <i class="fas fa-fw fa-folder-open"></i>
-                    <span>PERSEDIAAN</span>
+                    <span>Persediaan</span>
                 </a>
                 <div id="collapsePages1" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
@@ -73,7 +73,7 @@
                 <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapsePages2"
                     aria-expanded="true" aria-controls="collapsePages2">
                     <i class="fas fa-fw fa-folder-open"></i>
-                    <span>TRANSAKSI</span>
+                    <span>Transaksi</span>
                 </a>
                 <div id="collapsePages2" class="collapse" aria-labelledby="headingPages"
                     data-parent="#accordionSidebar">
@@ -82,6 +82,13 @@
                         <a class="collapse-item fas fa-arrow-circle-right" href="{{route('barangkeluar.index')}}"> Barang Keluar</a>
                     </div>
                 </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/laporan">
+                    <i class="fas fa-fw fa-folder-open"></i>
+                    <span>Laporan</span>
+                </a>
+
             </li>
 
             <!-- Divider -->
