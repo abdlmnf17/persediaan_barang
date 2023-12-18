@@ -3,11 +3,13 @@
 @section('content')
     <div class="container mt-5">
         <div class="card">
-            <div class="card-header">
-                <h2 class="mb-0">Laporan Periode {{ $startDate->format('d-m-Y') }} s/d {{ $endDate->format('d-m-Y') }}</h2>
+            <div class="card-header" align="center">
+                <h4 class="mb-0">PT. SEPATU BATA TBK </h4> <br/>
+                <h5 class="mb-0">Laporan Periode {{ $startDate->format('d-m-Y') }} s/d {{ $endDate->format('d-m-Y') }}</h5>
+
             </div>
             <div class="card-body">
-                <h3>Barang Masuk:</h3>
+                <h5>Barang Masuk:</h5>
                 <div class="table-responsive">
                     <table class="table table-bordered">
                         <thead>
@@ -39,7 +41,7 @@
                     </table>
                 </div>
 
-                <h3 class="mt-4">Barang Keluar:</h3>
+                <h5 class="mt-4">Barang Keluar:</h5>
                 <div class="table-responsive">
                     <table class="table table-bordered">
                         <thead>
@@ -70,11 +72,23 @@
                         </tbody>
                     </table>
                 </div>
-
                 <div class="mt-4">
+                    <!-- Tombol cetak PDF normal -->
                     <a href="{{ route('laporan.print', ['startDate' => $startDate->format('Y-m-d'), 'endDate' => $endDate->format('Y-m-d')]) }}" class="btn btn-success">Cetak PDF</a>
+{{--
+                    <!-- Tombol cetak PDF dengan print browser -->
+                    <a href="#" onclick="printPDF()" class="btn btn-info">Cetak & Print</a> --}}
                 </div>
             </div>
         </div>
     </div>
+
+
+    {{-- <script>
+        function printPDF() {
+            setTimeout(function() {
+                printWindow.print();
+            }, 1000);
+        }
+    </script> --}}
 @endsection

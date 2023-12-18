@@ -19,7 +19,7 @@
                             <input type="date" id="end_date" name="periode[end_date]" class="form-control" required>
                         </div>
                         <div class="col-md-2 mb-3">
-                            <button type="submit" class="btn btn-primary">Generate Laporan</button>
+                            <button type="submit" class="btn btn-primary">Buat Laporan</button>
                         </div>
                     </div>
                 </form>
