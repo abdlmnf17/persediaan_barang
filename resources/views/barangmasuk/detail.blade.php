@@ -5,7 +5,7 @@
     <fieldset>
         <div class="form-group row">
             <div class="col-md-5">
-                Nomor Transaksi<input type="text" class="form-control" value="{{$barangmasuk->nobm}}" disabled>
+                Nomor Transaksi<input type="text" class="form-control" value="{{$barangmasuk->idbm}}" disabled>
             </div>
         </div>
         <div class="form-group row">

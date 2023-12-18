@@ -6,7 +6,7 @@
 <hr>
 <div class="card-header py-3" align="right">
     <a href="{{route('barangmasuk.create')}}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-        <i class="fas fa-plus fa-sm text-white-50"></i> Tambah 
+        <i class="fas fa-plus fa-sm text-white-50"></i> Tambah
     </a>
 </div>
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -32,15 +32,20 @@
                         <td>{{$bm->memobm}}</td>
                         <td>{{$bm->jmbm}}</td>
                         <td align="center">
-                            <a class="d-none d-sm-inline-block btn btn-sm btn-dark shadow-sm">
-                                <i class="fas fa-check fa-sm text-white-50"></i> Transaksi Selesai
+                            <a href="/barangmasuk/detail/{{ $bm->id}}" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm">
+                                <i class="fas fa-edit fa-sm text-white-50"></i> Detail
                             </a>
-                            <a href="/barangmasuk/hapus/{{ $bm->id}}" onclick="return confirm('Yakin Ingin menghapus data?')" 
-                                class="dnone d-sm-inline-block btn btn-sm btn-danger shadow-sm"> 
-                                <i class="fas fa-trash-alt fa-sm text-white-50"></i> Hapus  
-                            </a> 
+                            <a href="/barangmasuk/hapus/{{ $bm->id}}" onclick="return confirm('Yakin Ingin menghapus data?')"
+                                class="dnone d-sm-inline-block btn btn-sm btn-danger shadow-sm">
+                                <i class="fas fa-trash-alt fa-sm text-white-50"></i> Hapus
+                            </a>
                         </td>
                     </tr>
+
+
+
+
+
                     @endforeach
                 </tbody>
             </table>

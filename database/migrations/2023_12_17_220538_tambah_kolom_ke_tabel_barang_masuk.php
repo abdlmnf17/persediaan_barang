@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBarangMasuksTable extends Migration
+class TambahKolomKeTabelBarangMasuk extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,8 @@ class CreateBarangMasuksTable extends Migration
      */
     public function up()
     {
-        Schema::create('barang_masuk', function (Blueprint $table) {
-            $table->id();
-            $table->string('jnsbm', 10);
+        Schema::table('barang_masuk', function (Blueprint $table) {
             $table->string('idbm', 20);
-            $table->date('tglbm');
-            $table->text('memobm');
-            $table->double('jmbm');
-            $table->timestamps();
         });
     }
 
@@ -31,6 +25,8 @@ class CreateBarangMasuksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('barang_masuks');
+        Schema::table('barang_masuk', function (Blueprint $table) {
+            //
+        });
     }
 }

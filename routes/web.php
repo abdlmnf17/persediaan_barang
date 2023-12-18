@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\PrintController;
+use App\Http\Controllers\LaporanController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,14 +26,25 @@ Route::resource( '/user' , 'UserController' );
 
 Route::get('/user/hapus/{kode}','UserController@destroy');
 
-Route::resource( '/barangkeluar', 'BarangKeluarController'); 
+Route::resource( '/barangkeluar', 'BarangKeluarController');
 
 Route::resource( '/persediaan', 'PersediaanController');
+Route::get( '/persediaan/edit/{id}', 'PersediaanController@edit');
+
+Route::get( '/barangmasuk/detail/{id}', 'BarangmasukController@show');
+Route::get( '/barangkeluar/detail/{id}', 'BarangkeluarController@show');
 
 Route::resource( '/barangmasuk', 'BarangMasukController');
 
 Route::resource( '/laporan' , 'LaporanController' );
 
-Route::get('/barangkeluar/hapus/{id}','BarangkeluarController@destroy'); 
+Route::get('/barangkeluar/hapus/{id}','BarangkeluarController@destroy');
 
-Route::get('/barangmasuk/hapus/{id}','BarangmasukController@destroy'); 
+Route::get('/barangmasuk/hapus/{id}','BarangmasukController@destroy');
+Route::get('/persediaan/hapus/{id}','PersediaanController@destroy');
+Route::get('/laporan', [LaporanController::class, 'index'])->name('laporan.index');
+Route::post('/laporan/generate', [LaporanController::class, 'generate'])->name('laporan.generate');
+Route::get('/laporan/print/{startDate}/{endDate}', 'LaporanController@printPDF')->name('laporan.print');
+
+
+Route::get('/print-laporan', [PrintController::class, 'printLaporan']);

@@ -19,14 +19,14 @@
             </div>
         </div>
         <div class="form-group row">
-            <div class="col-md-5">
+            <div class="col-md-7">
                 Tanggal transaksi<input id="tgltr" type="date" name="tgltr" value="" class="form-control" required>
             </div>
         <div class="form-group row">
             <div class="col-md-10">
                 Memo<textarea id="memo" type="text" name="memo" class="form-control" required></textarea>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-10">
                 Jumlah Barang Masuk
                 @for($i=1;$i<=3;$i++) <input id="txt{{$i}}" type="text" name="txt{{$i}}" class="form-control" value="0"
                     onkeyup="sum();">
@@ -34,12 +34,12 @@
                     <input id="idbm" type="hidden" name="idbm" class="form-control" value="{{$nomorawal}}" required>
             </div>
         </div>
-            <div class="col-md-10">Total Barang Masuk
+            <div class="col-md-4">Total Barang Masuk
                 <input id="total" type="text" name="total" class="form-control" required>
             </div>
         </div>
         <div class="form-group row">
-            <div class="col-md-10">
+            <div class="col-md-4">
                 <input type="submit" class="btn btn-success btn-send" value="Simpan">
                 <input type="Button" class="btn btn-primary btn-send" value="Kembali" onclick="history.go(-1)">
             </div>

@@ -9,17 +9,17 @@
             <div class="col-md-5">
                 <div class="col-md-5">
                     <label for="kode">Kode Barang</label>
-                    <input id="kode" type="text" name="kode" class="form-control">
-                </div>
+                    <input id="kode" type="text" name="kode" class="form-control" required>
+                </div><br/>
                 <div class="col-md-5">
                     <label for="nama">Nama Barang</label>
-                    <input id="nama" type="text" name="nama" class="form-control">
-                </div>
+                    <input id="nama" type="text" name="nama" class="form-control" required>
+                </div><br/>
             </div>
             <div class="form-group row">
                 <div class="col-md-5">
                     <label for="jenis">Jenis Barang</label>
-                    <select id="jenis" name="jenis" class="form-control">
+                    <select id="jenis" name="jenis" class="form-control" required>
                         <option value="">--Pilih Klasifikasi--</option>
                         <option value="Sandal">Sandal</option>
                         <option value="Sepatu">Sepatu</option>
@@ -29,7 +29,7 @@
             <div class="form-group row">
                 <div class="col-md-5">
                     <label for="jumlah">Jumlah Barang</label>
-                    <input id="jumlah" type="text" name="jumlah" class="form-control">
+                    <input id="jumlah" type="text" name="jumlah" class="form-control" required>
                 </div>
             </div>
             <div class="col-md-10">

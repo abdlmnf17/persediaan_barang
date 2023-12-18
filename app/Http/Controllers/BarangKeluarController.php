@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\BarangKeluar; 
+use App\BarangKeluarDet;
+use App\BarangKeluar;
 use DB;
 
 class BarangKeluarController extends Controller
@@ -15,8 +16,8 @@ class BarangKeluarController extends Controller
      */
     public function index()
     {
-        $bk = \App\BarangKeluar::All(); 
-        return view( 'barangkeluar.barangkeluar' , ['barangkeluar'  => $bk]); 
+        $bk = \App\BarangKeluar::All();
+        return view( 'barangkeluar.barangkeluar' , ['barangkeluar'  => $bk]);
     }
 
     /**
@@ -26,31 +27,31 @@ class BarangKeluarController extends Controller
      */
     public function create()
     {
-        $akun = \App\BarangKeluar::All(); 
-        $akun2 = BarangKeluar::paginate(3); 
+        $akun = \App\BarangKeluar::All();
+        $akun2 = BarangKeluar::paginate(3);
 
-        $AWAL = 'BK'; 
-        // karna array dimulai dari 0 maka kita tambah di awal data kosong 
-        // bisa juga mulai dari "1"=>"I" 
+        $AWAL = 'BK';
+        // karna array dimulai dari 0 maka kita tambah di awal data kosong
+        // bisa juga mulai dari "1"=>"I"
         $bulanRomawi = array("", "I","II","III", "IV", "V","VI","VII","VIII"
-        ,"IX","X", "XI","XII"); 
-        $noUrutAkhir = \App\barangkeluar::max('id'); 
-        $nomorawal=$noUrutAkhir+1; 
-        $no = 1; 
-        if($noUrutAkhir) { 
-            //echo "No urut surat di database : " . $noUrutAkhir; 
-            //echo "<br>"; 
-            $nomor=sprintf($AWAL . '-' ."%05s", abs($noUrutAkhir + 1));  
+        ,"IX","X", "XI","XII");
+        $noUrutAkhir = \App\barangkeluar::max('id');
+        $nomorawal=$noUrutAkhir+1;
+        $no = 1;
+        if($noUrutAkhir) {
+            //echo "No urut surat di database : " . $noUrutAkhir;
+            //echo "<br>";
+            $nomor=sprintf($AWAL . '-' ."%05s", abs($noUrutAkhir + 1));
         }
-        else 
-        { 
-        //echo "No urut surat di database : 0" ; 
-        //echo "<br>"; 
-        $nomor=sprintf($AWAL . '-' ."%05s", $no);  
-        } 
-        return view('barangkeluar.input', ['nomor'=>$nomor,'nomorawal'=>$nomorawal,'akun'=>$akun,'akn'=>$akun2]);   
+        else
+        {
+        //echo "No urut surat di database : 0" ;
+        //echo "<br>";
+        $nomor=sprintf($AWAL . '-' ."%05s", $no);
+        }
+        return view('barangkeluar.input', ['nomor'=>$nomor,'nomorawal'=>$nomorawal,'akun'=>$akun,'akn'=>$akun2]);
     }
-    
+
 
     /**
      * Store a newly created resource in storage.
@@ -60,41 +61,41 @@ class BarangKeluarController extends Controller
      */
     public function store(Request $request)
     {
-        //Menyimpan Data Ke Tabel Barang_Keluar 
-        $save_bk = new \App\BarangKeluar; 
-        $save_bk->id=$request->get('notrans'); 
+        //Menyimpan Data Ke Tabel Barang_Keluar
+        $save_bk = new \App\BarangKeluar;
+        $save_bk->idbk=$request->get('notrans');
         $save_bk->nmcsbk=$request->get('nmcsbk');
-        $save_bk->jnsbk=$request->get('jenis');    
-        $save_bk->tglbk=$request->get('tgltr'); 
-        $save_bk->memobk=$request->get('memo'); 
-        $save_bk->jmbk=$request->get('total'); 
-        $save_bk->save();         
-         
+        $save_bk->jnsbk=$request->get('jenis');
+        $save_bk->tglbk=$request->get('tgltr');
+        $save_bk->memobk=$request->get('memo');
+        $save_bk->jmbk=$request->get('total');
+        $save_bk->save();
+
         //Menyimpan Data Ke Tabel Persediaan
-        //$savepr= new \App\Persediaan; 
-        //$savepr->id=$request->get('idpr'); 
-        //$savepr->jmlpr=$request->get('total'); 
-        //$savepr->jmlcr=0; 
-        //$savepr->save(); 
-     
-        //Menyimpan Data Ke Tabel Barang_Keluar_det 
-        for($i=1;$i<=3;$i++)     
-        { 
-            $idbk=$request->get('id'); 
-            $nil=$request->get('txt'.$i); 
- 
-            { 
-                return redirect()->route( 'barangkeluar.index' ); 
-            } 
-            { 
-                $savedet = new \App\BarangKeluarDet; 
-                $savedet->id=$id;
-                $savedet->nilcr=$nil; 
-                $savedet->save(); 
-            }                  
-        }  
-        return redirect()->route( 'Barangkeluar.index' ); 
-    
+        //$savepr= new \App\Persediaan;
+        //$savepr->id=$request->get('idpr');
+        //$savepr->jmlpr=$request->get('total');
+        //$savepr->jmlcr=0;
+        //$savepr->save();
+
+        //Menyimpan Data Ke Tabel Barang_Keluar_det
+        for($i=1;$i<=3;$i++)
+        {
+            $idbk=$request->get('id');
+            $nil=$request->get('txt'.$i);
+
+            {
+                return redirect()->route( 'barangkeluar.index' );
+            }
+            {
+                $savedet = new \App\BarangKeluarDet;
+                $savedet->idbk=$id;
+                $savedet->nilcr=$nil;
+                $savedet->save();
+            }
+        }
+        return redirect()->route( 'Barangkeluar.index' );
+
     }
 
     /**
@@ -105,7 +106,8 @@ class BarangKeluarController extends Controller
      */
     public function show($id)
     {
-        //
+        $barangkeluar_detail = \App\BarangKeluar::findOrFail($id);
+        return view( 'barangkeluar.detail' , ['barangkeluar'  => $barangkeluar_detail]);
     }
 
     /**
@@ -116,8 +118,8 @@ class BarangKeluarController extends Controller
      */
     public function edit($id)
     {
-        $barangkeluar_edit = \App\BarangKeluar::findOrFail($id); 
-        return view( 'barangkeluar.edit' , ['barangkeluar'  => $barangkeluar_edit]); 
+        $barangkeluar_edit = \App\BarangKeluar::findOrFail($id);
+        return view( 'barangkeluar.edit' , ['barangkeluar'  => $barangkeluar_edit]);
 
     }
 
@@ -141,10 +143,10 @@ class BarangKeluarController extends Controller
      */
     public function destroy($id)
     {
-        $bk = \App\BarangKeluar::findOrFail($id); 
-        $bk->delete(); 
-        DB::table('barang_keluar_det')->where('id','=',$bk->id)->delete(); 
- 
-        return redirect()->route( 'barangkeluar.index'); 
+        $bk = \App\BarangKeluar::findOrFail($id);
+        $bk->delete();
+        DB::table('barang_keluar_det')->where('idbk','=',$bk->id)->delete();
+
+        return redirect()->route( 'barangkeluar.index');
     }
 }

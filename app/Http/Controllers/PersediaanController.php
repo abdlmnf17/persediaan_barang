@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\BarangMasuk; 
-use App\Barangkeluar; 
-use DB; 
+use App\BarangMasuk;
+use App\Barangkeluar;
+use App\Persediaan;
+use DB;
 
 class PersediaanController extends Controller
 {
@@ -16,7 +17,7 @@ class PersediaanController extends Controller
      */
     public function index()
     {
-        $pr = \App\Persediaan::All(); 
+        $pr = \App\Persediaan::All();
         return view( 'persediaan.persediaan' , ['persediaan'  => $pr]);
     }
 
@@ -27,7 +28,7 @@ class PersediaanController extends Controller
      */
     public function create()
     {
-        return view('persediaan.input'); 
+        return view('persediaan.input');
     }
 
     /**
@@ -38,15 +39,15 @@ class PersediaanController extends Controller
      */
     public function store(Request $request)
     {
-        //Menyimpan data kedalam tabel 
-        $save_persediaan = new \App\Persediaan; 
-        $save_persediaan->idpr=$request->get('kode'); 
-        $save_persediaan->nmpr=$request->get('nama'); 
-        $save_persediaan->jnspr=$request->get('jenis'); 
+        //Menyimpan data kedalam tabel
+        $save_persediaan = new \App\Persediaan;
+        $save_persediaan->idpr=$request->get('kode');
+        $save_persediaan->nmpr=$request->get('nama');
+        $save_persediaan->jnspr=$request->get('jenis');
         $save_persediaan->jmlpr=$request->get('jumlah');
-        $save_persediaan->save(); 
+        $save_persediaan->save();
 
-        return redirect()->route( 'persediaan.index' ); 
+        return redirect()->route( 'persediaan.index' );
     }
 
     /**
@@ -57,10 +58,10 @@ class PersediaanController extends Controller
      */
     public function show($id)
     {
-        $pr = \App\Persediaan::findOrFail($id); 
-        //Query Mengambil Data Detail 
-        $detail = DB::select('SELECT persediaan.idpr, persediaan.nmpr, kas_keluar_det.nilcr FROM kas_keluar_det, persediaan WHERE persediaan.id=kas_keluar_det.idakun AND idpr = :id', ['id' => $pr->id]); 
-        return view( 'persediaan.detail' , ['persediaan'  => $pr, 'kaskeluardet' => $detail]); 
+        $pr = \App\Persediaan::findOrFail($id);
+        //Query Mengambil Data Detail
+        $detail = DB::select('SELECT persediaan.idpr, persediaan.nmpr, kas_keluar_det.nilcr FROM kas_keluar_det, persediaan WHERE persediaan.id=kas_keluar_det.idakun AND idpr = :id', ['id' => $pr->id]);
+        return view( 'persediaan.detail' , ['persediaan'  => $pr, 'kaskeluardet' => $detail]);
     }
 
     /**
@@ -71,8 +72,8 @@ class PersediaanController extends Controller
      */
     public function edit($id)
     {
-        $persediaan_edit = \App\Persediaan::findOrFail($id); 
-        return view( 'persediaan.edit' , ['persediaan'  => $persediaan_edit]); 
+        $persediaan_edit = \App\Persediaan::findOrFail($id);
+        return view( 'persediaan.edit' , ['persediaan'  => $persediaan_edit]);
 
     }
 
@@ -83,14 +84,15 @@ class PersediaanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function update(Request $request, $id)
     {
-        $persediaan = \App\Persediaan::findOrFail($id); 
-        $persediaan->idpr=$request->get('kode'); 
-        $persedian->nmpr=$request->get('nama'); 
-        $persediaan->jnspr=$request->get('jenis'); 
+        $persediaan = \App\Persediaan::findOrFail($id);
+        $persediaan->idpr=$request->get('kode');
+        $persediaan->nmpr=$request->get('nama');
+        $persediaan->jnspr=$request->get('jenis');
         $persediaan->jmlpr=$request->get('jumlah');
-        $persediaan->save(); 
+        $persediaan->save();
         return redirect()->route( 'persediaan.index');
     }
 
@@ -102,6 +104,9 @@ class PersediaanController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $persediaan = \App\Persediaan::findOrFail($id);
+        $persediaan->delete();
+
+        return redirect()->route( 'persediaan.index');
     }
 }
